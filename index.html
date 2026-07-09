@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDzzFirstProject Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --accent-blue: #2563eb;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .phone-container {
+            width: 100%;
+            max-width: 420px;
+            background-color: var(--bg-color);
+            min-height: 90vh;
+            padding-bottom: 30px;
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5px;
+            border-bottom: 1px solid #1f2937;
+            margin-bottom: 20px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-left i {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .nav-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .nav-right i {
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-main);
+        }
+
+        /* Gaya untuk Logo Profile di Pojok Kanan Atas */
+        .nav-profile-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #7f1d1d;
+            cursor: pointer;
+            background-color: #000;
+        }
+
+        /* Kotak Wadah Video - Diubah aspek rasionya menjadi 2.55:1 ultra-wide cinematic */
+        .video-box {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #1f2937;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+            background-color: #000;
+            position: relative;
+            aspect-ratio: 2.55 / 1; 
+            margin-bottom: 20px;
+        }
+
+        .video-box video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Main Welcome Card - VERSI MERAH TEMA KEGELAPAN (DARK RED) */
+        .welcome-card {
+            background: linear-gradient(135deg, #450a0a, #1a0505); 
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #7f1d1d; 
+            box-shadow: 0 6px 20px rgba(127, 29, 29, 0.25); 
+        }
+
+        .welcome-subtitle {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fca5a5; 
+            margin-bottom: 5px;
+        }
+
+        .welcome-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fee2e2; 
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #fca5a5; 
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin: 25px 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Account Info & Developer Card */
+        .info-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .info-group {
+            margin-bottom: 15px;
+        }
+
+        .info-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: #ffffff; 
+        }
+
+        /* Kotak Kalimat Pengumuman Perkembangan */
+        .development-notice {
+            background-color: rgba(127, 29, 29, 0.1); 
+            border: 1px dashed rgba(225, 29, 72, 0.25); 
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-top: -5px; 
+            margin-bottom: 15px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #ffffff; 
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .development-notice i {
+            color: #ef4444; 
+            font-size: 16px;
+            margin-top: 2px;
+        }
+
+        /* Developer / Medsos List */
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1e293b;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: background 0.2s;
+        }
+
+        .social-link:hover {
+            background: #334155;
+        }
+
+        .social-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+        }
+
+        .social-info i {
+            font-size: 20px;
+        }
+
+        .fa-instagram { color: #e1306c; }
+        .fa-youtube { color: #ff0000; }
+        .fa-tiktok { color: #ffffff; }
+
+        .fa-chevron-right {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+
+    <div class="navbar">
+        <div class="nav-left">
+            <i class="fa-solid fa-bars"></i>
+            <span class="nav-title">Dashboard</span>
+        </div>
+        <div class="nav-right">
+            <i class="fa-solid fa-chart-simple" title="Leaderboard"></i>
+            <svg class="nav-profile-img" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" title="Account Profile">
+                <circle cx="50" cy="50" r="48" fill="#1a0505"/>
+                <path d="M35 60 L45 37 L56 34 L43 56 L41 60 Z" fill="#fca5a5" />
+                <path d="M43 45 L52 40 L50 44 L41 49 Z" fill="#fca5a5" />
+                <path d="M51 47 L62 42 L67 44 L55 58 L52 62 L49 62 L53 54 Z" fill="#fca5a5" />
+                <path d="M54 49 L62 46 L60 50 L52 54 Z" fill="#fca5a5" />
+            </svg>
+        </div>
+    </div>
+
+    <div class="video-box">
+        <video autoplay loop muted playsinline preload="auto">
+            <source src="replace.mp4" type="video/mp4">
+            Browser kamu tidak mendukung pemutar video.
+        </video>
+    </div>
+
+    <div class="welcome-card">
+        <div class="welcome-subtitle">Welcome Back</div>
+        <div class="welcome-title">IDzzFirstProject</div>
+        
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-label"><i class="fa-solid fa-users"></i> Online Users</div>
+                <div class="stat-value">0</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label"><i class="fa-solid fa-link"></i> Connections</div>
+                <div class="stat-value">0</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <i class="fa-solid fa-user-shield"></i> Account Info
+    </div>
+    <div class="info-card">
+        <div class="info-group">
+            <div class="info-label">Username</div>
+            <div class="info-value">${username}</div>
+        </div>
+        <div class="info-group">
+            <div class="info-label">Role</div>
+            <div class="info-value">${DISPLAYROLE}</div>
+        </div>
+    </div>
+
+    <div class="development-notice">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span>Website ini sedang dalam perkembangan, support terus developernya agar lebih semangat dalam mengembangkan project website ini, jangan lupa follow medsos developer dibawah ini</span>
+    </div>
+
+    <div class="section-title">
+        <i class="fa-solid fa-code"></i> Developer Profile
+    </div>
+    <div class="info-card">
+        <a href="https://instagram.com/Javramproey" target="_blank" class="social-link">
+            <div class="social-info">
+                <i class="fa-brands fa-instagram"></i>
+                <span>@Javramproey</span>
+            </div>
+            <i class="fa-solid fa-chevron-right"></i>
+        </a>
+
+        <a href="https://youtube.com/@Japràa12th" target="_blank" class="social-link">
+            <div class="social-info">
+                <i class="fa-brands fa-youtube"></i>
+                <span>Japràa12th</span>
+            </div>
+            <i class="fa-solid fa-chevron-right"></i>
+        </a>
+
+        <a href="https://tiktok.com/@javrr12th" target="_blank" class="social-link">
+            <div class="social-info">
+                <i class="fa-brands fa-tiktok"></i>
+                <span>@javrr12th</span>
+            </div>
+            <i class="fa-solid fa-chevron-right"></i>
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
